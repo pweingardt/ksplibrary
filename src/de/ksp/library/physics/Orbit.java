@@ -2,6 +2,8 @@ package de.ksp.library.physics;
 
 /**
  * Created by paul on 2/1/14, 10:34 AM.
+ *
+ * This class describes an orbit around a body
  */
 public class Orbit {
 
@@ -49,6 +51,9 @@ public class Orbit {
     public Orbit(Orbit orbit) {
         this.eccentricity = orbit.eccentricity;
         this.semiMajorAxis = orbit.semiMajorAxis;
+        this.inclination = orbit.inclination;
+        this.lan = orbit.lan;
+        this.argumentOfPeriapsis = orbit.argumentOfPeriapsis;
         this.body = orbit.body;
     }
 
@@ -186,5 +191,13 @@ public class Orbit {
      */
     public void setArgumentOfPeriapsis(double argumentOfPeriapsis) {
         this.argumentOfPeriapsis = argumentOfPeriapsis;
+    }
+
+    public double getMeanMotion() {
+        return Math.sqrt(body.getGravitationalParameter() / Math.pow(semiMajorAxis, 3.0));
+    }
+
+    public String toString() {
+        return String.format("(%s | %.2f | %.2f | %.2f | %.2f | %.2f)", body.name, semiMajorAxis, eccentricity, inclination, lan, argumentOfPeriapsis);
     }
 }

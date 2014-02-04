@@ -1,6 +1,6 @@
 package de.ksp.library.physics;
 
-import de.ksp.library.MathContants;
+import de.ksp.library.MathUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -165,7 +165,7 @@ public class Body {
      * @return
      */
     public double getGravitationalParameter() {
-        return MathContants.gravitationalConstant * mass;
+        return MathUtils.gravitationalConstant * mass;
     }
 
     /**
@@ -205,7 +205,7 @@ public class Body {
      * @return
      */
     public double getSurfaceGravity() {
-        return MathContants.gravitationalConstant * mass / (radius * radius);
+        return MathUtils.gravitationalConstant * mass / (radius * radius);
     }
 
     /**

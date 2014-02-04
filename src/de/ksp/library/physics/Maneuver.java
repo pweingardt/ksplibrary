@@ -5,25 +5,8 @@ package de.ksp.library.physics;
  */
 public abstract class Maneuver {
 
-    protected Maneuver previous;
-    protected Orbit target = null;
+    public abstract double getDeltaV(Orbit from);
 
-    protected Maneuver(Maneuver previous) {
-        this.previous = previous;
-    }
-
-    public abstract double getDeltaV();
-
-    public double getTotalDeltaV() {
-        if(previous == null) {
-            return getDeltaV();
-        } else {
-            return previous.getTotalDeltaV() + getDeltaV();
-        }
-    }
-
-    public Orbit getTargetOrbit() {
-        return target;
-    }
+    public abstract Orbit getTargetOrbit(Orbit from);
 
 }

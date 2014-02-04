@@ -5,27 +5,16 @@ package de.ksp.library.physics;
  */
 public class HohmannTransfer extends Maneuver {
 
-    public HohmannTransfer(Maneuver previous) {
-        super(previous);
+    private double altitude;
+
+    public HohmannTransfer update(double altitude) {
+        this.altitude = altitude;
+        return this;
     }
 
-    public void update(Orbit targetOrbit) {
-        this.target = targetOrbit;
-    }
-
-    @Override
-    public double getDeltaV() {
-        if(previous == null) {
-            return -1;
-        }
-
-        if(previous.getTargetOrbit().getBody() != target.getBody()) {
-            return -1;
-        }
-
+    public double getDeltaV(Orbit from) {
+        Orbit target = getTargetOrbit(from);
         Body b = target.getBody();
-
-        Orbit from = previous.getTargetOrbit();
 
         double r12 = from.getSemiMajorAxis() + target.getSemiMajorAxis();
 
@@ -37,4 +26,12 @@ public class HohmannTransfer extends Maneuver {
 
         return Math.abs(v1 + v2);
     }
+
+    @Override
+    public Orbit getTargetOrbit(Orbit from) {
+        Orbit orbit = new Orbit(from);
+        orbit.updateByCircularOrbit(orbit.getBody(), altitude);
+        return orbit;
+    }
+
 }
