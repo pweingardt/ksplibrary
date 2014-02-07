@@ -5,7 +5,7 @@ package de.ksp.library.physics;
  */
 public abstract class Maneuver {
 
-    public abstract double getDeltaV(Orbit from);
+    public abstract DeltaV getDeltaV(Orbit from);
 
     public abstract Orbit getTargetOrbit(Orbit from);
 

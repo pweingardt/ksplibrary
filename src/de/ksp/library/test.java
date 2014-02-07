@@ -9,9 +9,8 @@ public class test {
 
     public static void main(String[] args) {
         ManeuverManager manager = new ManeuverManager();
-        manager.addManeuver(new Launch().update(Body.Kerbin, 80000, 5.0, 3.5));
-        manager.addManeuver(new HohmannTransfer().update(2868750));
-        manager.addManeuver(new InclinationChange().update(4.0, false));
+        manager.addManeuver(new Launch().update(Body.Kerbin, 200000, 5.0, 3.5));
+        manager.addManeuver(new InterplanetaryTransfer().update(Body.Moho));
 
         for(ManeuverSimulation sim : manager.simulate()) {
             System.out.println("Type: " + sim.type.toString());
@@ -21,8 +20,9 @@ public class test {
             if(sim.targetOrbit != null) {
                 System.out.println("To: " + sim.targetOrbit.toString());
             }
-            System.out.println("Delta-v: " + sim.deltaV);
-            System.out.println("Total DeltaV: " + sim.totalDeltaV);
+            System.out.println("min. Delta-v: " + sim.deltaV.min);
+            System.out.println("max. Delta-v: " + sim.deltaV.max);
+            System.out.println("Total DeltaV: " + sim.totalDeltaV.min);
             System.out.println("-------");
         }
     }

@@ -53,8 +53,8 @@ public class Launch extends Maneuver {
     }
 
     @Override
-    public double getDeltaV(Orbit from) {
-        return launchOrbit.deltav + transfer.getDeltaV(createOrbit());
+    public DeltaV getDeltaV(Orbit from) {
+        return new DeltaV(launchOrbit.deltav).add(transfer.getDeltaV(createOrbit()));
     }
 
     public Orbit getTargetOrbit(Orbit from) {

@@ -23,14 +23,14 @@ public class InclinationChange extends Maneuver {
     }
 
     @Override
-    public double getDeltaV(Orbit from) {
+    public DeltaV getDeltaV(Orbit from) {
         if(from.getEccentricity() == 0.0) {
-            return 2.0 * Math.sqrt(from.getBody().getGravitationalParameter() / from.getSemiMajorAxis()) *
-                    MathUtils.sind(deltaI / 2.0);
+            return new DeltaV(2.0 * Math.sqrt(from.getBody().getGravitationalParameter() / from.getSemiMajorAxis()) *
+                    MathUtils.sind(deltaI / 2.0));
         } else {
-            return 2.0 * MathUtils.sind(deltaI / 2.0) * Math.sqrt(1.0 - Math.pow(from.getEccentricity(), 2.0)) *
+            return new DeltaV(2.0 * MathUtils.sind(deltaI / 2.0) * Math.sqrt(1.0 - Math.pow(from.getEccentricity(), 2.0)) *
                     MathUtils.cosd(from.getArgumentOfPeriapsis() + trueAnomaly) * from.getMeanMotion() * from.getSemiMajorAxis()
-                    / (1 + from.getEccentricity() * MathUtils.cosd(trueAnomaly));
+                    / (1 + from.getEccentricity() * MathUtils.cosd(trueAnomaly)));
         }
     }
 

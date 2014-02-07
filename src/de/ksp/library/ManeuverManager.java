@@ -1,5 +1,6 @@
 package de.ksp.library;
 
+import de.ksp.library.physics.DeltaV;
 import de.ksp.library.physics.Maneuver;
 import de.ksp.library.physics.ManeuverSimulation;
 import de.ksp.library.physics.Orbit;
@@ -32,7 +33,7 @@ public class ManeuverManager {
         maneuvers.add(maneuver);
     }
 
-    public double getTotalDeltaV() {
+    public DeltaV getTotalDeltaV() {
         List<ManeuverSimulation> list = simulate();
         return list.get(list.size() - 1).totalDeltaV;
     }
@@ -40,11 +41,11 @@ public class ManeuverManager {
     public List<ManeuverSimulation> simulate() {
         List<ManeuverSimulation> list = new ArrayList<ManeuverSimulation>();
 
-        double deltav = 0.0;
+        DeltaV deltav = new DeltaV(0);
         Orbit orbit = startOrbit;
 
         for(Maneuver m : maneuvers) {
-            deltav += m.getDeltaV(orbit);
+            deltav = deltav.add(m.getDeltaV(orbit));
 
             list.add(new ManeuverSimulation(m, orbit, m.getTargetOrbit(orbit), m.getDeltaV(orbit), deltav));
             orbit = m.getTargetOrbit(orbit);

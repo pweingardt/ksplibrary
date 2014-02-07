@@ -12,7 +12,7 @@ public class HohmannTransfer extends Maneuver {
         return this;
     }
 
-    public double getDeltaV(Orbit from) {
+    public DeltaV getDeltaV(Orbit from) {
         Orbit target = getTargetOrbit(from);
         Body b = target.getBody();
 
@@ -24,7 +24,7 @@ public class HohmannTransfer extends Maneuver {
         double v2 = Math.sqrt(b.getGravitationalParameter() / target.getSemiMajorAxis())
                 * (1.0 - Math.sqrt(2 * from.getSemiMajorAxis() / r12));
 
-        return Math.abs(v1 + v2);
+        return new DeltaV(Math.abs(v1 + v2));
     }
 
     @Override

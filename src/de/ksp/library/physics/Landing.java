@@ -17,8 +17,8 @@ public class Landing extends Maneuver {
     }
 
     @Override
-    public double getDeltaV(Orbit from) {
-        return 0;
+    public DeltaV getDeltaV(Orbit from) {
+        return new DeltaV(0);
     }
 
     @Override

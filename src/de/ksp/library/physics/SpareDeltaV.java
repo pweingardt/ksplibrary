@@ -13,8 +13,8 @@ public class SpareDeltaV extends Maneuver {
     }
 
     @Override
-    public double getDeltaV(Orbit from) {
-        return spareDeltaV;
+    public DeltaV getDeltaV(Orbit from) {
+        return new DeltaV(spareDeltaV);
     }
 
     @Override
